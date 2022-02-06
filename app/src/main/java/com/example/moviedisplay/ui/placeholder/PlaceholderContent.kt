@@ -1,4 +1,4 @@
-package com.example.moviedisplay.placeholder
+package com.example.moviedisplay.ui.placeholder
 
 import java.util.ArrayList
 import java.util.HashMap

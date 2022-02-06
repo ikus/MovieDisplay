@@ -1,4 +1,4 @@
-package com.example.moviedisplay
+package com.example.moviedisplay.ui
 
 import android.content.ClipData
 import android.content.ClipDescription
@@ -14,7 +14,8 @@ import androidx.core.view.ViewCompat
 import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
-import com.example.moviedisplay.placeholder.PlaceholderContent;
+import com.example.moviedisplay.R
+import com.example.moviedisplay.ui.placeholder.PlaceholderContent;
 import com.example.moviedisplay.databinding.FragmentItemListBinding
 import com.example.moviedisplay.databinding.ItemListContentBinding
 

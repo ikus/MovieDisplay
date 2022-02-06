@@ -1,4 +1,4 @@
-package com.example.moviedisplay
+package com.example.moviedisplay.ui
 
 import android.content.ClipData
 import android.os.Bundle
@@ -9,7 +9,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-import com.example.moviedisplay.placeholder.PlaceholderContent
+import com.example.moviedisplay.ui.placeholder.PlaceholderContent
 import com.example.moviedisplay.databinding.FragmentItemDetailBinding
 
 /**
