@@ -4,6 +4,7 @@ import android.content.ClipData
 import android.content.ClipDescription
 import android.os.Build
 import android.os.Bundle
+import android.util.Log
 import android.view.KeyEvent
 import android.view.LayoutInflater
 import android.view.View
@@ -13,11 +14,35 @@ import android.widget.Toast
 import androidx.core.view.ViewCompat
 import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
+import androidx.recyclerview.widget.DividerItemDecoration
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.moviedisplay.R
 import com.example.moviedisplay.ui.placeholder.PlaceholderContent;
 import com.example.moviedisplay.databinding.FragmentItemListBinding
 import com.example.moviedisplay.databinding.ItemListContentBinding
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+//NUevas
+import androidx.appcompat.app.AppCompatActivity
+import androidx.activity.viewModels
+import androidx.core.view.isVisible
+import androidx.lifecycle.Observer
+import androidx.lifecycle.viewModelScope
+import androidx.recyclerview.widget.GridLayoutManager
+
+//import com.example.moviedisplay.domain.GetMoviesUseCase
+//import com.example.moviedisplay.domain.GetRandomMovieUseCase
+//import com.example.moviedisplay.ui.view.adapter.MovieAdapter
+//import com.example.moviedisplay.ui.viewmodel.MovieViewModel
+
+import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.launch
+import javax.inject.Inject
+
+
+
+
 
 /**
  * A Fragment representing a list of Pings. This fragment
@@ -90,10 +115,45 @@ class ItemListFragment : Fragment() {
         recyclerView: RecyclerView,
         itemDetailFragmentContainer: View?
     ) {
+        /*
+        CoroutineScope(Dispatchers.IO).launch {
+            //isLoading.postValue(true)
+            val result = getMoviesUseCase()
+            runOnUiThread{
+                if (!result.isNullOrEmpty()) {
+                    //movieModel.postValue(result[0])
+                    //isLoading.postValue(false)
 
+                    //result[0].posterPath.
+
+                    var maviesdominio =  result.map { it.toDomain() }
+                    Log.e("INFO:::",maviesdominio.toString())
+
+                    val manager = LinearLayoutManager(applicationContext)
+                    val decoration = DividerItemDecoration(applicationContext, manager.orientation)
+                    binding.recyvlerViewMovies.layoutManager = manager
+
+                    binding.recyvlerViewMovies.adapter = MovieAdapter(maviesdominio/*emptyList()*/ /*MovieProvider.movieList*/) { movie ->
+                        onItemSelected(
+                            movie
+                        )
+                    }
+                    binding.recyvlerViewMovies.addItemDecoration(decoration)
+
+                }else{
+                    //TODO:Show error
+                }
+            }
+        }
+*/
+
+        /*
         recyclerView.adapter = SimpleItemRecyclerViewAdapter(
             PlaceholderContent.ITEMS, itemDetailFragmentContainer
         )
+         */
+
+
     }
 
     class SimpleItemRecyclerViewAdapter(
