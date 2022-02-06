@@ -1,10 +1,13 @@
 package com.example.moviedisplay.data
 
+import android.util.Log
 import com.example.moviedisplay.data.database.dao.MovieDao
 import com.example.moviedisplay.data.database.entities.MovieEntity
 //import com.example.moviedisplay.data.model.MovieModel
 import com.example.moviedisplay.data.model.SearchModel
+import com.example.moviedisplay.data.model.detail.DetailModel
 import com.example.moviedisplay.data.network.MovieService
+import com.example.moviedisplay.domain.model.MovieDetail
 import com.example.moviedisplay.domain.model.ResultItem
 //import com.example.moviedisplay.domain.model.Movie
 import com.example.moviedisplay.domain.model.Search
@@ -17,11 +20,15 @@ class MovieRepository @Inject constructor(
 ) {
 
     suspend fun getAllMoviesFromApi(currentpage:Int): Search {
-        val response: SearchModel = api.getMovies(currentpage)
+        val response: SearchModel = api.getPopularMovies(currentpage)
         return response.toDomain()
     }
 
-
+    suspend fun getDetailMovieFromApi(movieId:Int): MovieDetail {
+        val response :DetailModel = api.getDetailMovie(movieId)
+        Log.d("DETALLE::", response.overview!!)
+        return response.toDomain()
+    }
 
 /*
     suspend fun getAllMoviesFromApi(): List<Movie> {

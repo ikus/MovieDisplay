@@ -14,6 +14,9 @@ class GetMoviesUseCase @Inject constructor(private val repository: MovieReposito
 
     suspend operator fun invoke(): List<ResultsItem>? {
         val search = repository.getAllMoviesFromApi(1)
+
+        val detail= repository.getDetailMovieFromApi(search.results!![0].id)
+        Log.d("DETAIIL::", detail.title!!)
         //TODO: Refacorizar la pagina qu devuelve
 
         if(search.totalPages>0){
