@@ -53,6 +53,7 @@ class ItemDetailFragment : Fragment() {
                 // arguments. In a real-world scenario, use a Loader
                 // to load content from a content provider.
                 item = PlaceholderContent.ITEM_MAP[it.getString(ARG_ITEM_ID)]
+                item = PlaceholderContent.ITEM_MAP[it.getString(ARG_ITEM_ID)]
             }
         }
     }

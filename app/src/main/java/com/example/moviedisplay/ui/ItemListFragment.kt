@@ -120,7 +120,7 @@ class ItemListFragment : Fragment() {
         recyclerView: RecyclerView,
         itemDetailFragmentContainer: View?
     ) {
-
+/*
         CoroutineScope(Dispatchers.IO).launch {
             //isLoading.postValue(true)
             val result = getMoviesUseCase()
@@ -195,13 +195,13 @@ class ItemListFragment : Fragment() {
 
 
         }
+*/
 
 
-        /*
         recyclerView.adapter = SimpleItemRecyclerViewAdapter(
             PlaceholderContent.ITEMS, itemDetailFragmentContainer
         )
-         */
+
 
 
     }
@@ -236,6 +236,7 @@ class ItemListFragment : Fragment() {
             with(holder.itemView) {
                 tag = item
                 setOnClickListener { itemView ->
+                    //TODO: Esta es la parte que hayq ue refactorizar.
                     val item = itemView.tag as PlaceholderContent.PlaceholderItem
                     val bundle = Bundle()
                     bundle.putString(
