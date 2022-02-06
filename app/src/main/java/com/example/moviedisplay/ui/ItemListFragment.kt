@@ -29,6 +29,7 @@ import androidx.activity.viewModels
 import androidx.core.view.isVisible
 import androidx.lifecycle.Observer
 import androidx.lifecycle.viewModelScope
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.moviedisplay.model.GetMoviesUseCase
 import com.example.moviedisplay.ui.adapter.MovieAdapter
@@ -120,7 +121,7 @@ class ItemListFragment : Fragment() {
         recyclerView: RecyclerView,
         itemDetailFragmentContainer: View?
     ) {
-/*
+
         CoroutineScope(Dispatchers.IO).launch {
             //isLoading.postValue(true)
             val result = getMoviesUseCase()
@@ -195,13 +196,13 @@ class ItemListFragment : Fragment() {
 
 
         }
-*/
 
 
+/*
         recyclerView.adapter = SimpleItemRecyclerViewAdapter(
             PlaceholderContent.ITEMS, itemDetailFragmentContainer
         )
-
+*/
 
 
     }
@@ -212,6 +213,17 @@ class ItemListFragment : Fragment() {
             movie.title,
             Toast.LENGTH_SHORT
         ).show()
+
+        //TODO: Esta es la parte que hayq ue refactorizar.
+        //val item = itemView.tag as PlaceholderContent.PlaceholderItem
+
+        val bundle = Bundle()
+        bundle.putString(
+            ItemDetailFragment.ARG_ITEM_ID,
+            movie.id.toString()
+        )
+
+        findNavController().navigate(R.id.show_item_detail, bundle)
     }
 
     class SimpleItemRecyclerViewAdapter(

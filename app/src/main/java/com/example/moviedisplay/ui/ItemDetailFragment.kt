@@ -52,6 +52,9 @@ class ItemDetailFragment : Fragment() {
                 // Load the placeholder content specified by the fragment
                 // arguments. In a real-world scenario, use a Loader
                 // to load content from a content provider.
+
+                    //TODO: Obtenr el detalle de la pelicula
+
                 item = PlaceholderContent.ITEM_MAP[it.getString(ARG_ITEM_ID)]
                 item = PlaceholderContent.ITEM_MAP[it.getString(ARG_ITEM_ID)]
             }
