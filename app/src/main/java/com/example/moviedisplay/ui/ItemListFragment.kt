@@ -30,6 +30,8 @@ import androidx.core.view.isVisible
 import androidx.lifecycle.Observer
 import androidx.lifecycle.viewModelScope
 import androidx.recyclerview.widget.GridLayoutManager
+import com.example.moviedisplay.model.GetMoviesUseCase
+import com.example.moviedisplay.ui.adapter.MovieAdapter
 
 //import com.example.moviedisplay.domain.GetMoviesUseCase
 //import com.example.moviedisplay.domain.GetRandomMovieUseCase
@@ -52,8 +54,11 @@ import javax.inject.Inject
  * item details. On larger screens, the Navigation controller presents the list of items and
  * item details side-by-side using two vertical panes.
  */
-
+@AndroidEntryPoint
 class ItemListFragment : Fragment() {
+
+    @Inject
+    internal lateinit var getMoviesUseCase: GetMoviesUseCase
 
     /**
      * Method to intercept global key events in the
@@ -115,10 +120,49 @@ class ItemListFragment : Fragment() {
         recyclerView: RecyclerView,
         itemDetailFragmentContainer: View?
     ) {
-        /*
+
         CoroutineScope(Dispatchers.IO).launch {
             //isLoading.postValue(true)
             val result = getMoviesUseCase()
+            Log.e("INFO:::","iS NOT EMPTY")
+
+
+            activity?.runOnUiThread{
+                if (!result.isNullOrEmpty()) {
+                    //movieModel.postValue(result[0])
+                    //isLoading.postValue(false)
+
+                    //result[0].posterPath.
+
+
+
+                    var maviesdominio =  result.map { it.toDomain() }
+                    Log.e("INFO:::",maviesdominio.toString())
+
+                    val manager = LinearLayoutManager(activity)
+                    val decoration = DividerItemDecoration(activity, manager.orientation)
+
+                    recyclerView.layoutManager = manager
+
+
+
+                    recyclerView.adapter = MovieAdapter(maviesdominio/*emptyList()*/ /*MovieProvider.movieList*/) { movie ->
+                        onItemSelected(
+                            movie
+                        )
+                    }
+                    recyclerView.addItemDecoration(decoration)
+                    /*
+                    */
+                }else{
+                    //TODO:Show error
+                }
+            }
+
+
+
+
+            /*
             runOnUiThread{
                 if (!result.isNullOrEmpty()) {
                     //movieModel.postValue(result[0])
@@ -126,6 +170,8 @@ class ItemListFragment : Fragment() {
 
                     //result[0].posterPath.
 
+
+                /*
                     var maviesdominio =  result.map { it.toDomain() }
                     Log.e("INFO:::",maviesdominio.toString())
 
@@ -139,13 +185,17 @@ class ItemListFragment : Fragment() {
                         )
                     }
                     binding.recyvlerViewMovies.addItemDecoration(decoration)
-
+                    */
                 }else{
                     //TODO:Show error
                 }
             }
+
+             */
+
+
         }
-*/
+
 
         /*
         recyclerView.adapter = SimpleItemRecyclerViewAdapter(
@@ -154,6 +204,14 @@ class ItemListFragment : Fragment() {
          */
 
 
+    }
+
+    fun onItemSelected(movie:Movie){
+        Toast.makeText(
+            activity,
+            movie.title,
+            Toast.LENGTH_SHORT
+        ).show()
     }
 
     class SimpleItemRecyclerViewAdapter(
