@@ -7,9 +7,38 @@ import com.example.moviedisplay.data.model.detail.DetailModel
 //import com.google.gson.annotations.SerializedName
 
 
-data class MovieDetail (val id:Int?,val title:String?,val originalLanguage:String?)
+data class MovieDetail (val id:Int?,val title:String?,val originalLanguage:String?,
+                        val posterPath:String?,
+                        val backdropPath:String?,
+                        val revenue:Int?,
+                        val popularity:Double?,
+                        val voteCount:Int?,
+                        val budget:Int?,
+                        val overview:String?,
+                        val originalTitle:String?,
+                        val releaseDate:String?,
+                        val voteAverage:Double?,
+                        val isAdult:Boolean?,
+                        val homepage:String?,
+                        val status:String?
+                        )
 
-fun DetailModel.toDomain() = MovieDetail(id,title,originalLanguage)
+fun DetailModel.toDomain() = MovieDetail(id,title,originalLanguage,
+    posterPath,
+  backdropPath ,
+  revenue,
+  popularity,
+  voteCount,
+  budget,
+  overview ,
+  originalTitle ,
+  releaseDate ,
+  voteAverage,
+  isAdult,
+  homepage ,
+  status
+)
+
 /*
 data class DetailModel (
     @SerializedName("original_language")

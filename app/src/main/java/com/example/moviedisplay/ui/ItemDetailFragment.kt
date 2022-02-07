@@ -110,7 +110,7 @@ class ItemDetailFragment : Fragment() {
         toolbarLayout?.title = movieDetail?.title
         // Show the placeholder content as text in a TextView.
         movieDetail?.let {
-            itemDetailTextView.text = it.originalLanguage
+            itemDetailTextView.text = it.overview
         }
         //Obtner imagen
 
