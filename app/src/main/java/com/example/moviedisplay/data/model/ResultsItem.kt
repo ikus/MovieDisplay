@@ -43,5 +43,8 @@ data class ResultsItem (
     val isAdult: Boolean = false,
 
     @SerializedName("vote_count")
-    val voteCount: Int = 0
+    val voteCount: Int = 0,
+
+    //@SerializedName("poster_path")
+    val favorite: Boolean = false
 )

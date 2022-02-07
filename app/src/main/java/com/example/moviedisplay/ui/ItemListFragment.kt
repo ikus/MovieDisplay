@@ -137,8 +137,9 @@ class ItemListFragment : Fragment() {
 
 
 
-                    var maviesdominio =  result.map { it.toDomain() }
-                    Log.e("INFO:::",maviesdominio.toString())
+                    //var maviesdominio =  result.map { it.toDomain() }
+
+                    //Log.e("INFO:::",maviesdominio.toString())
 
                     //val manager = LinearLayoutManager(activity)
 
@@ -149,7 +150,7 @@ class ItemListFragment : Fragment() {
 
 
 
-                    recyclerView.adapter = MovieAdapter(maviesdominio/*emptyList()*/ /*MovieProvider.movieList*/) { movie ->
+                    recyclerView.adapter = MovieAdapter(result/*emptyList()*/ /*MovieProvider.movieList*/) { movie ->
                         onItemSelected(
                             movie
                         )
@@ -210,12 +211,13 @@ class ItemListFragment : Fragment() {
     }
 
     fun onItemSelected(movie:Movie){
+        /*
         Toast.makeText(
             activity,
             movie.title,
             Toast.LENGTH_SHORT
         ).show()
-
+        */
         //TODO: Esta es la parte que hayq ue refactorizar.
         //val item = itemView.tag as PlaceholderContent.PlaceholderItem
 

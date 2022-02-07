@@ -7,12 +7,15 @@ import com.example.moviedisplay.data.model.ResultsItem
 //import com.example.moviesdb.domain.model.Movie
 import com.example.moviedisplay.domain.model.ResultItem
 import com.example.moviedisplay.domain.model.toDomain
+import com.example.moviedisplay.ui.Movie
+import com.example.moviedisplay.ui.toDomain
 import javax.inject.Inject
 
 
 class GetMoviesUseCase @Inject constructor(private val repository: MovieRepository) {
 
-    suspend operator fun invoke(): List<ResultsItem>? {
+    suspend operator fun invoke(): List<Movie>?{//List<ResultsItem>? {
+        //val lista : List<ResultsItem>? = null
         val search = repository.getAllMoviesFromApi(1)
 
         //val detail= repository.getDetailMovieFromApi(search.results!![0].id)
@@ -22,13 +25,15 @@ class GetMoviesUseCase @Inject constructor(private val repository: MovieReposito
         if(search.totalPages>0){
             Log.i("INFO::","Tenemos resultadas" +search.totalResults)
             repository.clearMovies()
-            //repository.insertMovies(movies.map { it.toDatabase() })
+            repository.insertMovies(search.results?.map { it.toDatabase() } ?: emptyList())
             search.results
+            return   search.results?.map { it.toDomain() }
         }else{
             //Obter de la base de datos
+            //return repository.getAllMoviesFromDatabase().map { it.to }
         }
 
-        return search.results
+       return  search.results?.map { it.toDomain() }
         /*
         return if(search.totalPages>0){
             repository.clearMovies()

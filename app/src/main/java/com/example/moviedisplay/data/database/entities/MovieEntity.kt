@@ -4,14 +4,14 @@ import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 //import com.example.moviedisplay.domain.model.Movie
-import com.example.moviedisplay.domain.model.ResultItem
+import com.example.moviedisplay.data.model.ResultsItem
 
 @Entity(tableName = "movie_table")
 data class MovieEntity(
     @PrimaryKey(autoGenerate = false)
     @ColumnInfo(name = "id") val id: Int? = 0,
     @ColumnInfo(name = "title") val title: String?,
-
+    @ColumnInfo(name = "favorite") val favorite: Boolean
 
     //@ColumnInfo(name = "movie") val movie: String?,
     //@ColumnInfo(name = "favorite") val favorite: Boolean,
@@ -19,6 +19,8 @@ data class MovieEntity(
     //@ColumnInfo(name = "author") val author: String
 )
 
+fun ResultsItem.toDatabase() = MovieEntity(id = id,title=title,favorite=favorite)
+
 //fun Movie.toDatabase() = MovieEntity(id = id,title=title)
-fun ResultItem.toDatabase() = MovieEntity(id = id,title=title)
+//fun ResultItem.toDatabase() = MovieEntity(id = id,title=title, favorite = favorite)
 //fun Movie.toDatabase() = MovieEntity(id = id,title=title, movie = movie, favorite=favorite,quote=quote, author =  author)
