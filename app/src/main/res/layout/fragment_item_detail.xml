@@ -29,6 +29,17 @@
                 app:layout_collapseMode="pin"
                 app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
 
+            <ImageView
+                android:id="@+id/imageViewDetailMovie"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:src="@drawable/ic_launcher_foreground"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                />
+
+
+
         </com.google.android.material.appbar.CollapsingToolbarLayout>
 
     </com.google.android.material.appbar.AppBarLayout>
@@ -39,17 +50,66 @@
         android:layout_height="match_parent"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-        <TextView
-            android:id="@+id/item_detail"
-            style="?android:attr/textAppearanceLarge"
+        <LinearLayout
+            android:orientation="vertical"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:paddingStart="@dimen/container_horizontal_margin"
-            android:paddingTop="16dp"
-            android:paddingEnd="@dimen/container_horizontal_margin"
-            android:paddingBottom="16dp"
-            android:textIsSelectable="true"
-            tools:context="com.example.moviedisplay.ui.ItemDetailFragment" />
+            android:layout_height="match_parent">
+            <TextView
+                android:id="@+id/item_detail"
+                style="?android:attr/textAppearanceLarge"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:paddingStart="@dimen/container_horizontal_margin"
+                tools:text="Batman"
+                android:paddingTop="16dp"
+                android:paddingEnd="@dimen/container_horizontal_margin"
+                android:paddingBottom="16dp"
+                android:textIsSelectable="true"
+                tools:context="com.example.moviedisplay.ui.ItemDetailFragment" />
+
+
+            <TextView
+                android:id="@+id/item_1_detail"
+                tools:text="Detalle 2"
+                style="?android:attr/textAppearanceLarge"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:paddingStart="@dimen/container_horizontal_margin"
+                android:paddingTop="16dp"
+                android:paddingEnd="@dimen/container_horizontal_margin"
+                android:paddingBottom="16dp"
+                android:textIsSelectable="true"
+                tools:context="com.example.moviedisplay.ui.ItemDetailFragment" />
+
+            <TextView
+                android:id="@+id/item_2_detail"
+                tools:text="Detalle 2"
+                style="?android:attr/textAppearanceLarge"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:paddingStart="@dimen/container_horizontal_margin"
+                android:paddingTop="16dp"
+                android:paddingEnd="@dimen/container_horizontal_margin"
+                android:paddingBottom="16dp"
+                android:textIsSelectable="true"
+                tools:context="com.example.moviedisplay.ui.ItemDetailFragment" />
+
+
+            <TextView
+                android:id="@+id/item_3_detail"
+                tools:text="Detalle 2"
+                style="?android:attr/textAppearanceLarge"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:paddingStart="@dimen/container_horizontal_margin"
+                android:paddingTop="16dp"
+                android:paddingEnd="@dimen/container_horizontal_margin"
+                android:paddingBottom="16dp"
+                android:textIsSelectable="true"
+                tools:context="com.example.moviedisplay.ui.ItemDetailFragment" />
+        </LinearLayout>
+
+
 
     </androidx.core.widget.NestedScrollView>
 
@@ -62,6 +122,6 @@
         android:layout_marginBottom="16dp"
         app:layout_anchor="@+id/item_detail_scroll_view"
         app:layout_anchorGravity="top|end"
-        app:srcCompat="@android:drawable/stat_notify_chat" />
+        app:srcCompat="@drawable/ic_baseline_favorite_border_24" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

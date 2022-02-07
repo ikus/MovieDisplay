@@ -9,7 +9,9 @@ import com.google.android.material.appbar.CollapsingToolbarLayout
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
+import com.bumptech.glide.Glide
 import com.example.moviedisplay.ui.placeholder.PlaceholderContent
 import com.example.moviedisplay.databinding.FragmentItemDetailBinding
 import com.example.moviedisplay.domain.model.MovieDetail
@@ -39,9 +41,19 @@ class ItemDetailFragment : Fragment() {
     private var movieId : Int = 0
     private var movieDetail : MovieDetail? = null //TODO: cambiar esat clase
 
+    lateinit var item0DetailTextView: TextView
+    lateinit var item1DetailTextView: TextView
+    lateinit var item2DetailTextView: TextView
+    lateinit var item3DetailTextView: TextView
+    lateinit var item4DetailTextView: TextView
 
-    lateinit var itemDetailTextView: TextView
+
     private var toolbarLayout: CollapsingToolbarLayout? = null
+
+    lateinit var imageViewDetailMovie:ImageView
+
+
+
 
     private var _binding: FragmentItemDetailBinding? = null
 
@@ -86,7 +98,14 @@ class ItemDetailFragment : Fragment() {
         val rootView = binding.root
 
         toolbarLayout = binding.toolbarLayout
-        itemDetailTextView = binding.itemDetail
+        item0DetailTextView = binding.itemDetail
+        item1DetailTextView = binding.item1Detail!!
+        item2DetailTextView = binding.item2Detail!!
+        item3DetailTextView = binding.item3Detail!!
+        //item4DetailTextView = binding.itemDetail
+
+
+        imageViewDetailMovie = binding.imageViewDetailMovie!!
 
         updateContent()
         rootView.setOnDragListener(dragListener)
@@ -102,7 +121,10 @@ class ItemDetailFragment : Fragment() {
         CoroutineScope(Dispatchers.IO).launch {
             movieDetail = getDetailUseCase.invoke(movieId)
             Log.d("ORIGINAL LANGUAGE::", movieDetail?.originalLanguage.toString())
-            updateContent()
+            activity?.runOnUiThread{
+                updateContent()
+            }
+
         }
     }
 
@@ -110,10 +132,14 @@ class ItemDetailFragment : Fragment() {
         toolbarLayout?.title = movieDetail?.title
         // Show the placeholder content as text in a TextView.
         movieDetail?.let {
-            itemDetailTextView.text = it.overview
+            item0DetailTextView.text = it.overview
+            item1DetailTextView.text = it.releaseDate
+            item2DetailTextView.text = it.homepage
+            item3DetailTextView.text = it.status
         }
         //Obtner imagen
-
+        Glide.with(requireActivity()).load(
+            "http://image.tmdb.org/t/p/w185/"+movieDetail?.backdropPath +"?api_key=28b80b41ebf312e0ba2909f4472d67b6").into(imageViewDetailMovie)
 
     }
 
