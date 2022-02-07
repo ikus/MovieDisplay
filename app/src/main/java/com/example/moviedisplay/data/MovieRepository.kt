@@ -2,6 +2,7 @@ package com.example.moviedisplay.data
 
 import android.util.Log
 import com.example.moviedisplay.data.database.dao.MovieDao
+import com.example.moviedisplay.data.database.entities.DetailEntity
 import com.example.moviedisplay.data.database.entities.MovieEntity
 //import com.example.moviedisplay.data.model.MovieModel
 import com.example.moviedisplay.data.model.SearchModel
@@ -54,7 +55,16 @@ class MovieRepository @Inject constructor(
         movieDao.insertAll(movies)
     }
 
+    suspend fun insertDetails(movies:DetailEntity){
+        //movieDao.insertAll(movies)
+    }
+
     suspend fun clearMovies(){
         movieDao.deleteAllMovies()
     }
+
+    suspend fun clearDetails(){
+        //movieDao.deleteAllMovies()
+    }
+
 }

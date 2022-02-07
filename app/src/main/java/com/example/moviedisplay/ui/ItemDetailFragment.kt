@@ -2,6 +2,7 @@ package com.example.moviedisplay.ui
 
 import android.content.ClipData
 import android.os.Bundle
+import android.util.Log
 import android.view.DragEvent
 import androidx.fragment.app.Fragment
 import com.google.android.material.appbar.CollapsingToolbarLayout
@@ -11,6 +12,13 @@ import android.view.ViewGroup
 import android.widget.TextView
 import com.example.moviedisplay.ui.placeholder.PlaceholderContent
 import com.example.moviedisplay.databinding.FragmentItemDetailBinding
+import com.example.moviedisplay.domain.model.MovieDetail
+import com.example.moviedisplay.model.GetDetailUseCase
+import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import javax.inject.Inject
 
 /**
  * A fragment representing a single Item detail screen.
@@ -18,12 +26,19 @@ import com.example.moviedisplay.databinding.FragmentItemDetailBinding
  * in two-pane mode (on larger screen devices) or self-contained
  * on handsets.
  */
+@AndroidEntryPoint
 class ItemDetailFragment : Fragment() {
+
+    @Inject
+    internal lateinit var getDetailUseCase: GetDetailUseCase
 
     /**
      * The placeholder content this fragment is presenting.
      */
     private var item: PlaceholderContent.PlaceholderItem? = null
+    private var movieId : Int = 0
+    private var movieDetail : MovieDetail? = null //TODO: cambiar esat clase
+
 
     lateinit var itemDetailTextView: TextView
     private var toolbarLayout: CollapsingToolbarLayout? = null
@@ -57,6 +72,7 @@ class ItemDetailFragment : Fragment() {
 
                 item = PlaceholderContent.ITEM_MAP[it.getString(ARG_ITEM_ID)]
                 item = PlaceholderContent.ITEM_MAP[it.getString(ARG_ITEM_ID)]
+                movieId = it.getString(ARG_ITEM_ID)?.toInt() ?: 0
             }
         }
     }
@@ -75,16 +91,30 @@ class ItemDetailFragment : Fragment() {
         updateContent()
         rootView.setOnDragListener(dragListener)
 
+        //TODO: Aqu e pmezamos a llenar el view
+
+
+
         return rootView
     }
 
-    private fun updateContent() {
-        toolbarLayout?.title = item?.content
-
-        // Show the placeholder content as text in a TextView.
-        item?.let {
-            itemDetailTextView.text = it.details
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        CoroutineScope(Dispatchers.IO).launch {
+            movieDetail = getDetailUseCase.invoke(movieId)
+            Log.d("ORIGINAL LANGUAGE::", movieDetail?.originalLanguage.toString())
+            updateContent()
         }
+    }
+
+    private fun updateContent() {
+        toolbarLayout?.title = movieDetail?.title
+        // Show the placeholder content as text in a TextView.
+        movieDetail?.let {
+            itemDetailTextView.text = it.originalLanguage
+        }
+        //Obtner imagen
+
+
     }
 
     companion object {

@@ -3,32 +3,31 @@ package com.example.moviedisplay.model
 import android.util.Log
 import com.example.moviedisplay.data.MovieRepository
 import com.example.moviedisplay.data.database.entities.toDatabase
-import com.example.moviedisplay.data.model.ResultsItem
+import com.example.moviedisplay.data.model.detail.DetailModel
+import com.example.moviedisplay.domain.model.MovieDetail
 //import com.example.moviesdb.domain.model.Movie
 import com.example.moviedisplay.domain.model.ResultItem
 import com.example.moviedisplay.domain.model.toDomain
 import javax.inject.Inject
 
+class GetDetailUseCase @Inject constructor(private val repository: MovieRepository) {
 
-class GetMoviesUseCase @Inject constructor(private val repository: MovieRepository) {
-
-    suspend operator fun invoke(): List<ResultsItem>? {
-        val search = repository.getAllMoviesFromApi(1)
-
-        //val detail= repository.getDetailMovieFromApi(search.results!![0].id)
-        //Log.d("DETAIIL::", detail.title!!)
+    suspend operator fun invoke(movieID:Int): MovieDetail {
+        //val search = repository.getDetailMovieFromApi(movieID)
+        val detail= repository.getDetailMovieFromApi(movieID)
+        Log.d("DETAIIL::", detail.title!!)
         //TODO: Refacorizar la pagina qu devuelve
 
-        if(search.totalPages>0){
-            Log.i("INFO::","Tenemos resultadas" +search.totalResults)
-            repository.clearMovies()
-            //repository.insertMovies(movies.map { it.toDatabase() })
-            search.results
+        if(detail != null){
+            Log.i("INFO::","Tenemos detalles" +detail.originalLanguage)
+            repository.clearDetails()
+            repository.insertDetails(detail.toDatabase())//(movies.map { it.toDatabase() })
+            detail
         }else{
             //Obter de la base de datos
         }
 
-        return search.results
+        return detail
         /*
         return if(search.totalPages>0){
             repository.clearMovies()
