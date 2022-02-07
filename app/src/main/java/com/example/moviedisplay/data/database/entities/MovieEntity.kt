@@ -11,7 +11,7 @@ data class MovieEntity(
     @PrimaryKey(autoGenerate = false)
     @ColumnInfo(name = "id") val id: Int? = 0,
     @ColumnInfo(name = "title") val title: String?,
-    @ColumnInfo(name = "favorite") val favorite: Boolean,
+    @ColumnInfo(name = "favorite") val isFavorite: Boolean,
 
     //@ColumnInfo(name = "movie") val movie: String?,
     //@ColumnInfo(name = "favorite") val favorite: Boolean,
@@ -32,7 +32,7 @@ data class MovieEntity(
 
 )
 
-fun ResultsItem.toDatabase() = MovieEntity(id = id,title=title,favorite=favorite,
+fun ResultsItem.toDatabase() = MovieEntity(id = id,title=title,isFavorite=isFavorite,
     isAdult = isAdult,
     backdropPath = backdropPath,
     originalLanguage=originalLanguage,

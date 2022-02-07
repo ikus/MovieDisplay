@@ -46,5 +46,5 @@ data class ResultsItem (
     val voteCount: Int = 0,
 
     //@SerializedName("poster_path")
-    val favorite: Boolean = false
+    val isFavorite: Boolean = false
 )

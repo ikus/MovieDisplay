@@ -7,6 +7,7 @@ data class Movie(
     val id: Int,
     //val photo: String?,
     //new fileds
+    val favorite: Boolean,
     val adult: Boolean,
     val backdrop_path:String?,
     val original_language:String?,
@@ -21,5 +22,5 @@ data class Movie(
     val vote_count:Int
 )
 
-fun ResultsItem.toDomain() = Movie(id, isAdult , backdropPath,originalLanguage,originalTitle,overview, popularity,posterPath,releaseDate,title,isVideo, voteAverage,voteCount)
-fun MovieEntity.toDomain() = Movie(id!!,isAdult , backdropPath,originalLanguage,originalTitle,overview, popularity,posterPath,releaseDate,title,isVideo, voteAverage,voteCount)
+fun ResultsItem.toDomain() = Movie(id, isAdult ,isFavorite, backdropPath,originalLanguage,originalTitle,overview, popularity,posterPath,releaseDate,title,isVideo, voteAverage,voteCount)
+fun MovieEntity.toDomain() = Movie(id!!,isAdult ,isFavorite, backdropPath,originalLanguage,originalTitle,overview, popularity,posterPath,releaseDate,title,isVideo, voteAverage,voteCount)

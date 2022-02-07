@@ -12,10 +12,13 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import com.bumptech.glide.Glide
+import com.example.moviedisplay.R
+import com.example.moviedisplay.data.MovieRepository
 import com.example.moviedisplay.ui.placeholder.PlaceholderContent
 import com.example.moviedisplay.databinding.FragmentItemDetailBinding
 import com.example.moviedisplay.domain.model.MovieDetail
 import com.example.moviedisplay.model.GetDetailUseCase
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -34,6 +37,8 @@ class ItemDetailFragment : Fragment() {
     @Inject
     internal lateinit var getDetailUseCase: GetDetailUseCase
 
+    @Inject
+    internal lateinit var repository: MovieRepository
     /**
      * The placeholder content this fragment is presenting.
      */
@@ -46,6 +51,9 @@ class ItemDetailFragment : Fragment() {
     lateinit var item2DetailTextView: TextView
     lateinit var item3DetailTextView: TextView
     lateinit var item4DetailTextView: TextView
+
+    lateinit var fabFavorite: FloatingActionButton
+
 
 
     private var toolbarLayout: CollapsingToolbarLayout? = null
@@ -103,6 +111,7 @@ class ItemDetailFragment : Fragment() {
         item2DetailTextView = binding.item2Detail!!
         item3DetailTextView = binding.item3Detail!!
         //item4DetailTextView = binding.itemDetail
+        fabFavorite = binding.fab!!
 
 
         imageViewDetailMovie = binding.imageViewDetailMovie!!
@@ -125,7 +134,28 @@ class ItemDetailFragment : Fragment() {
                 updateContent()
             }
 
+
+            var isFavorite : Boolean =repository.getMovieFromDatabase(movieId).favorite
+            if(isFavorite == true) {
+                fabFavorite.setImageDrawable(resources.getDrawable(R.drawable.ic_baseline_favorite_24,activity?.theme))
+            } else {
+                fabFavorite.setImageDrawable(resources.getDrawable(R.drawable.ic_baseline_favorite_border_24,activity?.theme))
+            }
+
+            fabFavorite.setOnClickListener {
+                isFavorite = !isFavorite
+                if(isFavorite == true) {
+                    fabFavorite.setImageDrawable(resources.getDrawable(R.drawable.ic_baseline_favorite_24,activity?.theme))
+                } else {
+                    fabFavorite.setImageDrawable(resources.getDrawable(R.drawable.ic_baseline_favorite_border_24,activity?.theme))
+                }
+                CoroutineScope(Dispatchers.IO).launch {
+                    repository.setFavoriteInDatabase(movieId,isFavorite)
+                }
+            }
         }
+
+
     }
 
     private fun updateContent() {

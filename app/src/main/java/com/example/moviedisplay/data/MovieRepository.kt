@@ -46,6 +46,19 @@ class MovieRepository @Inject constructor(
     }
 
 
+    suspend fun getMovieFromDatabase(movieId:Int):Movie{
+        val response: MovieEntity = movieDao.getMovie(movieId)
+        return  response.toDomain()
+    }
+
+
+    suspend fun setFavoriteInDatabase(movieId:Int,isFavorite:Boolean):Boolean{
+        var valor = if(isFavorite ==true)  1 else 0
+        movieDao.setFavoriteMovie(movieId, valor)
+        return true
+    }
+
+
 /*
     suspend fun getAllMoviesFromDatabase():List<Movie>{
         val response: List<MovieEntity> = movieDao.getAllMovies()

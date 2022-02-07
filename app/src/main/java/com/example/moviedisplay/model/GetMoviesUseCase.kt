@@ -22,7 +22,7 @@ class GetMoviesUseCase @Inject constructor(private val repository: MovieReposito
         //Log.d("DETAIIL::", detail.title!!)
         //TODO: Refacorizar la pagina qu devuelve
 
-        if(search.totalPages<0){
+        if(search.totalPages>0){
             Log.i("INFO::","Tenemos resultadas" +search.totalResults)
             repository.clearMovies()
             repository.insertMovies(search.results?.map { it.toDatabase() } ?: emptyList())
