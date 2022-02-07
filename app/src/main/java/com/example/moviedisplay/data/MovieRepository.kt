@@ -13,6 +13,8 @@ import com.example.moviedisplay.domain.model.ResultItem
 //import com.example.moviedisplay.domain.model.Movie
 import com.example.moviedisplay.domain.model.Search
 import com.example.moviedisplay.domain.model.toDomain
+import com.example.moviedisplay.ui.Movie
+import com.example.moviedisplay.ui.toDomain
 import javax.inject.Inject
 
 class MovieRepository @Inject constructor(
@@ -38,9 +40,9 @@ class MovieRepository @Inject constructor(
     }
 */
 
-    suspend fun getAllMoviesFromDatabase():List<ResultItem>{
+    suspend fun getAllMoviesFromDatabase():List<Movie>{
         val response: List<MovieEntity> = movieDao.getAllMovies()
-        return response.map { it.toDomain() }
+        return  response.map { it.toDomain() }
     }
 
 

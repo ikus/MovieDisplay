@@ -1,5 +1,6 @@
 package com.example.moviedisplay.ui
 
+import com.example.moviedisplay.data.database.entities.MovieEntity
 import com.example.moviedisplay.data.model.ResultsItem
 
 data class Movie(
@@ -21,3 +22,4 @@ data class Movie(
 )
 
 fun ResultsItem.toDomain() = Movie(id, isAdult , backdropPath,originalLanguage,originalTitle,overview, popularity,posterPath,releaseDate,title,isVideo, voteAverage,voteCount)
+fun MovieEntity.toDomain() = Movie(id!!,isAdult , backdropPath,originalLanguage,originalTitle,overview, popularity,posterPath,releaseDate,title,isVideo, voteAverage,voteCount)
