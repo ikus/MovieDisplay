@@ -140,8 +140,10 @@ class ItemListFragment : Fragment() {
                     var maviesdominio =  result.map { it.toDomain() }
                     Log.e("INFO:::",maviesdominio.toString())
 
-                    val manager = LinearLayoutManager(activity)
-                    val decoration = DividerItemDecoration(activity, manager.orientation)
+                    //val manager = LinearLayoutManager(activity)
+
+                    val manager = GridLayoutManager(activity,2 )
+                    //val decoration = DividerItemDecoration(activity, manager.orientation)
 
                     recyclerView.layoutManager = manager
 
@@ -152,9 +154,9 @@ class ItemListFragment : Fragment() {
                             movie
                         )
                     }
-                    recyclerView.addItemDecoration(decoration)
-                    /*
-                    */
+
+                    //recyclerView.addItemDecoration(decoration)
+
                 }else{
                     //TODO:Show error
                 }

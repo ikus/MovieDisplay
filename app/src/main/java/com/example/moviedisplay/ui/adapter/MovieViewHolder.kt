@@ -16,8 +16,8 @@ class MovieViewHolder(view: View): RecyclerView.ViewHolder(view) {
     val binding = ItemMovieBinding.bind(view)
 
     fun render(movieModel:Movie,onClickListener:(Movie) -> Unit){
-        binding.textViewMovieName.text =   movieModel.title
-        binding.textViewMovieDescription.text = movieModel.overview
+        //binding.textViewMovieName.text =   movieModel.title
+        //binding.textViewMovieDescription.text = movieModel.overview
         Glide.with(binding.imageViewMovie.context).load(
             "http://image.tmdb.org/t/p/w185/"+movieModel.poster_path+"?api_key=28b80b41ebf312e0ba2909f4472d67b6").into(binding.imageViewMovie)
 
